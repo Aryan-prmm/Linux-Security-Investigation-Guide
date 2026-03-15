@@ -1,4 +1,4 @@
-# SSH Brute Force Detection Investigation (Kali Linux)
+# Day 1-SSH Brute Force Detection Investigation (Kali Linux)
 
 ## Scenario
 
