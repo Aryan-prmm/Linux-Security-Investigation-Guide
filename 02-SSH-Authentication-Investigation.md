@@ -227,3 +227,119 @@ When `/var/log/auth.log` is not available, SSH activity can be investigated usin
 
 Monitoring authentication logs is a critical task for SOC analysts to identify and respond to unauthorized access attempts.
 
+## Day 2 – Login Activity Investigation
+
+### Scenario
+
+A login event was detected at an unusual time.
+The objective was to determine whether the activity was legitimate or suspicious.
+
+---
+
+### Commands Used
+
+last
+who
+w
+lastlog / lastlog2
+
+---
+
+### Investigation Steps
+
+1. Checked login history using `last`
+2. Verified active sessions using `who`
+3. Analyzed user activity using `w`
+4. Attempted to check last login per user using `lastlog`
+
+---
+
+### Issue Encountered – lastlog Not Available
+
+The `lastlog` command was not available on the system.
+
+Attempt:
+
+```
+lastlog
+```
+
+Result:
+
+```
+command not found
+```
+
+---
+
+### Resolution Attempt
+
+Installed alternative tool:
+
+```
+sudo apt install lastlog2
+```
+
+However, the tool returned:
+
+```
+Cannot open database (/var/lib/lastlog/lastlog2.db)
+```
+
+---
+
+### Analysis of Issue
+
+The system had no existing login database for `lastlog2`, so no data was available.
+
+---
+
+### Alternative Approach
+
+Continued investigation using available commands:
+
+```
+last
+who
+w
+```
+
+---
+
+### Findings
+
+* Login history was reviewed for unusual timings
+* Active sessions were checked
+* User activity was analyzed
+* No suspicious login behavior was observed
+
+---
+
+### SOC Analysis
+
+Indicators checked:
+
+* login at unusual hours
+* unknown IP address
+* active suspicious session
+
+---
+
+### Severity Assessment
+
+| Scenario                  | Severity |
+| ------------------------- | -------- |
+| Normal login activity     | Low      |
+| Unusual login time        | Medium   |
+| Unknown IP login          | High     |
+| Active suspicious session | Critical |
+
+---
+
+### Conclusion
+
+Login activity analysis is essential for detecting unauthorized access.
+Even when certain tools are unavailable, investigation can continue using alternative commands such as `last`, `who`, and `w`.
+
+This highlights the importance of adaptability in SOC environments.
+
