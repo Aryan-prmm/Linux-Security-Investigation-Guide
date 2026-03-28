@@ -71,3 +71,65 @@ Indicators of compromise:
 User account investigation is critical for detecting unauthorized access and persistence mechanisms.
 Monitoring user accounts and privilege levels helps identify potential security threats.
 
+## Day 4 – Privilege Escalation Detection
+
+### Scenario
+
+A user was suspected of attempting to escalate privileges using sudo.
+The objective was to detect unauthorized privilege escalation attempts.
+
+---
+
+### Commands Used
+
+sudo -l
+id
+journalctl | grep sudo
+journalctl | grep "authentication failure"
+
+---
+
+### Investigation Steps
+
+1. Checked user privileges using `sudo -l`
+2. Verified user identity and group membership using `id`
+3. Analyzed sudo activity using system logs
+4. Checked for failed authentication attempts
+
+---
+
+### Findings
+
+* Verified whether user had sudo privileges
+* Reviewed logs for sudo command execution
+* Checked for repeated authentication failures
+
+---
+
+### SOC Analysis
+
+Indicators of privilege escalation:
+
+* repeated sudo authentication failures
+* execution of commands as root
+* user belonging to sudo group
+
+---
+
+### Severity Assessment
+
+| Scenario                        | Severity |
+| ------------------------------- | -------- |
+| Normal sudo usage               | Low      |
+| Repeated failed attempts        | Medium   |
+| Successful privilege escalation | High     |
+| Unknown user root access        | Critical |
+
+---
+
+### Conclusion
+
+Privilege escalation attempts can be detected by analyzing sudo activity and authentication logs.
+Monitoring user privileges and command execution helps identify unauthorized access and potential system compromise.
+
+
